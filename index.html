@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Tempo Juntos</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            margin: 0;
+            background: linear-gradient(to bottom, #1b1f4b, #3a2d63, #ff99cc);
+            color: white;
+            position: relative;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-bottom: 50px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .image-container {
+            position: relative;
+        }
+
+        img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            cursor: pointer;
+            font-size: 2em;
+            padding: 10px;
+            border-radius: 50%;
+        }
+
+        .arrow-left {
+            left: 10px;
+        }
+
+        .arrow-right {
+            right: 10px;
+        }
+
+        .box {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="frase-topo">💖 Nosso amor cresce a cada segundo! 💖</div>
+        <div class="image-container">
+            <button class="arrow arrow-left" onclick="changeImage(-1)">&#9665;</button>
+            <img id="photo" src="a.jpeg" alt="Foto do casal">
+            <button class="arrow arrow-right" onclick="changeImage(1)">&#9655;</button>
+        </div>
+        <div class="box">
+            <h1>Estamos juntos há:</h1>
+            <div id="contador"></div>
+        </div>
+        <div class="box" id="declaracao">
+            💖 Desde o momento em que te vi naquela festa eu senti meu coração me dizendo algo, era ele me falando que eu havia encontrado
+            A mulher da minha vida, e que era você que vai ser a mãe dos meus filhos, na hora não sabia exatamente o que eu senti
+            Mas depois de te conhecer melhor, depois de sairmos a primeira vez, eu tive a certeza de que Deus tinha me entregue
+            o maior presente de minha vida, uma garotinha linda, com um coração bom e que a cada dia mais eu me apaixono, passamos por
+            altos e baixos, mas nada nessa vida me faria desistir de estar ao seu lado para SEMPRE, minha vida se tornou mais colorida, mais feliz
+            e cheia de amor depois que te conheci e cada segundo ao seu lado é um presente e cada dia que passa, tenho mais certeza de que você é
+            a melhor escolha que já fiz e que eu te Amo infinitamente!
+            Você será para sempre a MINHA PRINCESA💕
+        </div>
+        <footer>💖 Feito com todo o amor do mundo 💖</footer>
+    </div>
+
+    <script>
+        const images = ["a.jpeg", "b.jpeg", "c.jpeg", "d.jpeg", "e.jpeg", "f.jpeg", "g.png", "h.webp", "i.jpeg", "j.jpeg"];
+        let currentIndex = 0;
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = images.length - 1;
+            if (currentIndex >= images.length) currentIndex = 0;
+            document.getElementById("photo").src = images[currentIndex];
+        }
+
+        function atualizarTempo() {
+            let dataInicio = new Date("2024-03-01T00:00:00");
+            let agora = new Date();
+
+            let anos = agora.getFullYear() - dataInicio.getFullYear();
+            let meses = agora.getMonth() - dataInicio.getMonth();
+            let dias = agora.getDate() - dataInicio.getDate();
+            let horas = agora.getHours() - dataInicio.getHours();
+            let minutos = agora.getMinutes() - dataInicio.getMinutes();
+            let segundos = agora.getSeconds() - dataInicio.getSeconds();
+
+            if (segundos < 0) { segundos += 60; minutos--; }
+            if (minutos < 0) { minutos += 60; horas--; }
+            if (horas < 0) { horas += 24; dias--; }
+            if (dias < 0) {
+                let ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0);
+                dias += ultimoMes.getDate();
+                meses--;
+            }
+            if (meses < 0) { meses += 12; anos--; }
+
+            let resultado = "";
+            if (anos > 0) resultado += `${anos} ano${anos > 1 ? "s" : ""}, `;
+            if (meses > 0) resultado += `${meses} mês${meses > 1 ? "es" : ""}, `;
+            resultado += `${dias} dia${dias > 1 ? "s" : ""}, ${horas} hora${horas > 1 ? "s" : ""}, `;
+            resultado += `${minutos} minuto${minutos > 1 ? "s" : ""} e ${segundos} segundo${segundos > 1 ? "s" : ""} 💖`;
+
+            document.getElementById("contador").innerText = resultado;
+        }
+
+        setInterval(atualizarTempo, 1000);
+        atualizarTempo();
+    </script>
+</body>
+</html>
